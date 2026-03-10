@@ -1,10 +1,5 @@
-package com.turankerimov.dto;
+package com.turankerimov.dto.comment;
 
-import com.turankerimov.entity.Movie;
-import com.turankerimov.entity.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +17,4 @@ public class CommentDtoIU {
 
     private LocalDate createdDate;
 
-    private User user;
-
-    private Movie movie;
 }
