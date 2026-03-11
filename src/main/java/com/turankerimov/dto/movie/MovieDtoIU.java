@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MovieDtoIU {
 
-    private Long id;
 
     private String title;
 
@@ -20,9 +19,7 @@ public class MovieDtoIU {
 
     private Genre genre;
 
-    private Double averageRating;
 
-    private Integer ratingCount;
 
 
 }
