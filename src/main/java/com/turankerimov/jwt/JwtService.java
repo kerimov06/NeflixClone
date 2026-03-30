@@ -30,7 +30,7 @@ public class JwtService {
 
     //Tokeni oxu
       public <T> T exportToken(String token, Function<Claims,T> claimsTFunction){
-            Claims claims =   Jwts.parserBuilder()
+            Claims claims = Jwts.parserBuilder()
                        .setSigningKey(getSecretKey())
                        .build()
                        .parseClaimsJws(token).getBody();

@@ -11,13 +11,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class UserDtoIU {
 
-    private Long id;
 
     private String username;
 
     private String password;
 
-    private LocalDate createdAt;
 
 
 }
