@@ -1,16 +1,14 @@
 package com.turankerimov.service.authrequest;
 
-import com.turankerimov.dto.user.UserDtoIU;
 import com.turankerimov.dto.user.UserResponseDto;
 import com.turankerimov.entity.User;
 import com.turankerimov.jwt.AuthRequest;
-import com.turankerimov.jwt.JwtService;
 import com.turankerimov.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Service
@@ -24,7 +22,7 @@ public class AuthRequestService implements IAuthRequestService{
 
 
     @Override
-    public UserResponseDto register(AuthRequest userDtoIU) {
+    public ResponseEntity<UserResponseDto> register(AuthRequest userDtoIU) {
 
         User user = new User();
 
@@ -38,6 +36,6 @@ public class AuthRequestService implements IAuthRequestService{
          userResponseDto.setUsername(saveUser.getUsername());
          userResponseDto.setCreationDate(new Date());
 
-        return userResponseDto;
+        return ResponseEntity.ok(userResponseDto);
     }
 }

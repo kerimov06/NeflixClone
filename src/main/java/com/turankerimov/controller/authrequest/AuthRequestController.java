@@ -5,6 +5,7 @@ import com.turankerimov.jwt.AuthRequest;
 import com.turankerimov.service.authrequest.IAuthRequestService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ public class AuthRequestController implements IAuthRequestController {
 
     @PostMapping("/register")
     @Override
-    public UserResponseDto register(@Valid @RequestBody AuthRequest userDtoIU) {
+    public ResponseEntity<UserResponseDto> register(@Valid @RequestBody AuthRequest userDtoIU) {
         return authRequestService.register(userDtoIU);
     }
 

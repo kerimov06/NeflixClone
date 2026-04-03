@@ -42,7 +42,7 @@ public class JwtService {
         }
 
 
-        public boolean isTokenExpired(String token) {
+        public boolean isTokenValid(String token) {
               Date date = exportToken(token,Claims::getExpiration);
               return new Date().before(date);
         }
