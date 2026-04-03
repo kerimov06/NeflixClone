@@ -2,6 +2,7 @@ package com.turankerimov.controller.authrequest;
 
 import com.turankerimov.dto.user.UserResponseDto;
 import com.turankerimov.jwt.AuthRequest;
+import com.turankerimov.jwt.AuthResponse;
 import com.turankerimov.service.authrequest.IAuthRequestService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,11 @@ public class AuthRequestController implements IAuthRequestController {
         return authRequestService.register(userDtoIU);
     }
 
-
-
+    @PostMapping("/authenticate")
+    @Override
+    public ResponseEntity<AuthResponse> authenticate(@Valid @RequestBody AuthRequest authRequest) {
+        return authRequestService.authenticate(authRequest);
+    }
 
 
 }
