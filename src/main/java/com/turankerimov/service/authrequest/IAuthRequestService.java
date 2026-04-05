@@ -9,5 +9,6 @@ public interface IAuthRequestService {
 
    public ResponseEntity<UserResponseDto> register(AuthRequest userDtoIU);
    public ResponseEntity<AuthResponse> authenticate(AuthRequest authRequest);
+   public ResponseEntity<AuthResponse> refresh(String refreshToken);
 
 }

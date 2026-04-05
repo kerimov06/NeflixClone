@@ -32,5 +32,11 @@ public class AuthRequestController implements IAuthRequestController {
         return authRequestService.authenticate(authRequest);
     }
 
+    @PostMapping("/refresh")
+    @Override
+    public ResponseEntity<AuthResponse> refresh(@RequestBody String token) {
+        return authRequestService.refresh(token);
+    }
+
 
 }
