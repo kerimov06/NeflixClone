@@ -41,8 +41,6 @@ public class AuthRequestService implements IAuthRequestService{
 
 
 
-
-
     public RefreshToken createRefreshToken(User user) {
           RefreshToken refreshToken = new RefreshToken();
           refreshToken.setToken(UUID.randomUUID().toString());
