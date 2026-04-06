@@ -15,8 +15,6 @@ import java.util.*;
 public class GlobalExceptionHandler {
 
 
-
-
     public List<String> addNewValue(List<String> list , String value){
         list.add(value);
         return list;
@@ -30,8 +28,6 @@ public class GlobalExceptionHandler {
 
        for (ObjectError objects : ex.getBindingResult().getAllErrors()){
           String fieldName = ((FieldError) objects).getField();
-
-
 
           if (map.containsKey(fieldName)){
               map.put(fieldName,addNewValue(map.get(fieldName),objects.getDefaultMessage()));
@@ -54,7 +50,6 @@ public class GlobalExceptionHandler {
 
 
 
-
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<ExceptionResponse> handleBaseException(BaseException e, HttpServletRequest request) {
 
@@ -63,7 +58,7 @@ public class GlobalExceptionHandler {
 
 
         ExceptionResponse exceptionResponse = ExceptionResponse.builder()
-                .message(e.getMessage())
+                .message(errorCode.getMessage())
                 .path(request.getRequestURI())
                 .status(errorCode.getHttpStatus().value())
                 .timestamp(LocalDateTime.now())
