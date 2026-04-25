@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -37,13 +38,13 @@ public class User implements UserDetails {
     private LocalDate createdAt;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
-    private List<Rating> ratings;
+    private List<Rating> ratings = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Watchlist> watchlist;
+    private List<Watchlist> watchlist = new ArrayList<>();
 
     public void addUserRating(Rating rating) {
          this.ratings.add(rating);

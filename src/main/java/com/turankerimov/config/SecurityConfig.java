@@ -20,6 +20,7 @@ public class SecurityConfig {
 
     public static final String AUTHENTICATE = "/authenticate";
     public static final String REGISTER = "/register";
+    public static final String REFRESH = "/refresh";
 
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
@@ -46,7 +47,7 @@ public class SecurityConfig {
                           expecption.authenticationEntryPoint(authEntryPoint)
                   )
                   .authorizeHttpRequests(request ->
-                          request.requestMatchers(AUTHENTICATE, REGISTER).permitAll()
+                          request.requestMatchers(AUTHENTICATE, REGISTER,REFRESH).permitAll()
                                   .requestMatchers(SWAGGER_EXTENSIONS).permitAll().
                                   anyRequest().authenticated()
                   )

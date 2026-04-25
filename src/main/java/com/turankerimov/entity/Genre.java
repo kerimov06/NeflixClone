@@ -7,5 +7,5 @@ public enum Genre {
     COMEDY,
     HORROR,
     THRILLER,
-    SCI_FI
+    SCI_FI,
 }

@@ -2,6 +2,7 @@ package com.turankerimov.service.authrequest;
 
 import com.turankerimov.dto.user.UserResponseDto;
 import com.turankerimov.entity.RefreshToken;
+import com.turankerimov.entity.RequestRefreshToken;
 import com.turankerimov.entity.User;
 import com.turankerimov.jwt.AuthRequest;
 import com.turankerimov.jwt.AuthResponse;
@@ -70,14 +71,15 @@ public class AuthRequestService implements IAuthRequestService{
                     .orElseThrow(()-> new RuntimeException("Username not found"));
 
              String accessToken = jwtService.generateToken(user);
-             RefreshToken refreshToken = createRefreshToken(user);
+             RefreshToken refreshToken = createRefreshToken(user)       ;
 
         return ResponseEntity.ok(new AuthResponse(accessToken,refreshToken.getToken()));
     }
 
+
     @Override
-    public ResponseEntity<AuthResponse> refresh(String requestToken) {
-                   RefreshToken refreshToken = refreshTokenRepository.findByToken(requestToken)
+    public ResponseEntity<AuthResponse> refresh(RequestRefreshToken request) {
+                   RefreshToken refreshToken = refreshTokenRepository.findByToken(request.getRefreshToken())
                            .orElseThrow(()-> new RuntimeException("Refresh token not found"));
 
                    if (refreshToken.getExpireDate().isBefore(Instant.now())) {
@@ -85,9 +87,14 @@ public class AuthRequestService implements IAuthRequestService{
                          throw new RuntimeException("Refresh token expired");
                    }
 
-                        String newAccessToken =  jwtService.generateToken(refreshToken.getUser());
+                    User user = refreshToken.getUser();
 
-                   return ResponseEntity.ok(new AuthResponse(newAccessToken,refreshToken.getToken()));
+                      refreshTokenRepository.deleteById(refreshToken.getId());
+
+                        String newAccessToken =  jwtService.generateToken(user);
+                        RefreshToken newRefreshToken = createRefreshToken(user);
+
+                   return ResponseEntity.ok(new AuthResponse(newAccessToken,newRefreshToken.getToken()));
     }
 
     @Override

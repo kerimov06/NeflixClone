@@ -5,10 +5,9 @@ import com.turankerimov.dto.movie.MovieResponseDto;
 import com.turankerimov.service.movie.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/movie")
@@ -22,5 +21,18 @@ public class MovieControllerImpl implements IMovieController {
      @Override
     public ResponseEntity<MovieResponseDto> saveMovie(@RequestBody MovieDtoIU saveMovie) {
         return movieService.saveMovie(saveMovie);
+    }
+
+    @GetMapping("/getMovieById/{id}")
+    @Override
+    public ResponseEntity<MovieResponseDto> getMovieById(@PathVariable(name = "id") Long id) {
+        return movieService.getMovieById(id);
+    }
+
+    @GetMapping("/search")
+    @Override
+    public ResponseEntity<List<MovieResponseDto>> getMovieByTitle(@RequestParam(name = "title")
+                                                                String title) {
+        return movieService.getMovieByTitle(title);
     }
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,19 +34,19 @@ public class Movie {
     private Genre genre;
 
     @Column(name = "average_rating")
-    private Double averageRating;
+    private Double averageRating = 0.0;
 
     @Column(name = "rating_count" )
-    private Integer ratingCount;
+    private Integer ratingCount = 0;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
-    private List<Rating> ratings;
+    private List<Rating> ratings = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "movie")
-    private List<Comment> comments;
+    private List<Comment> comments= new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "movie")
-    private List<Watchlist>  watchlist;
+    private List<Watchlist>  watchlist = new ArrayList<>();
 
 
     public void addMovieRating(Rating rating){
