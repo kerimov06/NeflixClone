@@ -4,6 +4,7 @@ import com.turankerimov.dto.movie.MovieDtoIU;
 import com.turankerimov.dto.movie.MovieResponseDto;
 import com.turankerimov.entity.Movie;
 import com.turankerimov.repository.movie.MovieRepository;
+import org.jspecify.annotations.NonNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -30,16 +31,21 @@ public class MovieServiceImpl implements IMovieService{
          if (savedMovie==null) {
              throw new IllegalArgumentException("savedMovie is null");
          }
-         MovieResponseDto movieResponseDto = new MovieResponseDto();
-
-           movieResponseDto.setId(savedMovie.getId());
-           movieResponseDto.setTitle(savedMovie.getTitle());
-           movieResponseDto.setDescription(savedMovie.getDescription());
-           movieResponseDto.setAverageRating(savedMovie.getAverageRating());
-           movieResponseDto.setRatingCount(savedMovie.getRatingCount());
-           movieResponseDto.setGenre(savedMovie.getGenre());
-           movieResponseDto.setReleaseYear(savedMovie.getReleaseYear());
+        MovieResponseDto movieResponseDto = getMovieResponseDto(savedMovie);
 
         return ResponseEntity.ok(movieResponseDto);
+    }
+
+    private static @NonNull MovieResponseDto getMovieResponseDto(Movie savedMovie) {
+        MovieResponseDto movieResponseDto = new MovieResponseDto();
+
+        movieResponseDto.setId(savedMovie.getId());
+        movieResponseDto.setTitle(savedMovie.getTitle());
+        movieResponseDto.setDescription(savedMovie.getDescription());
+        movieResponseDto.setAverageRating(savedMovie.getAverageRating());
+        movieResponseDto.setRatingCount(savedMovie.getRatingCount());
+        movieResponseDto.setGenre(savedMovie.getGenre());
+        movieResponseDto.setReleaseYear(savedMovie.getReleaseYear());
+        return movieResponseDto;
     }
 }

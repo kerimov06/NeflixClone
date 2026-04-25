@@ -27,6 +27,14 @@ public class SecurityConfig {
     @Autowired
     private AuthEntryPoint authEntryPoint;
 
+
+    public static final String[] SWAGGER_EXTENSIONS = {
+
+                    "/v3/api-docs/**",
+                    "/swagger-ui/**",
+                    "/swagger-ui.html"
+};
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
           http
@@ -38,7 +46,9 @@ public class SecurityConfig {
                           expecption.authenticationEntryPoint(authEntryPoint)
                   )
                   .authorizeHttpRequests(request ->
-                          request.requestMatchers(AUTHENTICATE, REGISTER).permitAll().anyRequest().authenticated()
+                          request.requestMatchers(AUTHENTICATE, REGISTER).permitAll()
+                                  .requestMatchers(SWAGGER_EXTENSIONS).permitAll().
+                                  anyRequest().authenticated()
                   )
                   .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 

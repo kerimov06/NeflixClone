@@ -60,6 +60,7 @@ public class AuthRequestService implements IAuthRequestService{
                                authRequest.getPassword()
                        )
                );
+
            }catch (Exception e) {
                e.printStackTrace();
                throw e;
@@ -70,7 +71,6 @@ public class AuthRequestService implements IAuthRequestService{
 
              String accessToken = jwtService.generateToken(user);
              RefreshToken refreshToken = createRefreshToken(user);
-
 
         return ResponseEntity.ok(new AuthResponse(accessToken,refreshToken.getToken()));
     }
@@ -86,7 +86,6 @@ public class AuthRequestService implements IAuthRequestService{
                    }
 
                         String newAccessToken =  jwtService.generateToken(refreshToken.getUser());
-
 
                    return ResponseEntity.ok(new AuthResponse(newAccessToken,refreshToken.getToken()));
     }
