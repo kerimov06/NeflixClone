@@ -35,4 +35,10 @@ public class MovieControllerImpl implements IMovieController {
                                                                 String title) {
         return movieService.getMovieByTitle(title);
     }
+
+    @GetMapping("/getAllMovies")
+    @Override
+    public ResponseEntity<List<MovieResponseDto>> getAllMovies() {
+        return movieService.getAllMovies();
+    }
 }

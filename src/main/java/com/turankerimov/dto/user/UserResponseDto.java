@@ -12,9 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class UserResponseDto {
 
-    private String username;
-
-    private Date creationDate;
+    private String registerMessage = "Register Successfully!";
 
 
 }

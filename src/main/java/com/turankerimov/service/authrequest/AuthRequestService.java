@@ -99,7 +99,7 @@ public class AuthRequestService implements IAuthRequestService{
 
     @Override
     public ResponseEntity<UserResponseDto> register(AuthRequest userDtoIU) {
-
+        UserResponseDto userResponseDto = new UserResponseDto();
         User user = new User();
 
         user.setUsername(userDtoIU.getUsername());
@@ -107,10 +107,6 @@ public class AuthRequestService implements IAuthRequestService{
 
 
         User saveUser = userRepository.save(user);
-
-        UserResponseDto userResponseDto = new UserResponseDto();
-         userResponseDto.setUsername(saveUser.getUsername());
-         userResponseDto.setCreationDate(new Date());
 
         return ResponseEntity.ok(userResponseDto);
     }

@@ -11,5 +11,7 @@ public interface IMovieService {
     public ResponseEntity<MovieResponseDto> saveMovie(MovieDtoIU saveMovie);
     public ResponseEntity<MovieResponseDto> getMovieById(Long id);
     public ResponseEntity<List<MovieResponseDto>> getMovieByTitle(String title);
+    public ResponseEntity<List<MovieResponseDto>> getAllMovies();
+
 
 }

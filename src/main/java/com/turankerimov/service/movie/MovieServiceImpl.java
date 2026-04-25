@@ -71,6 +71,20 @@ public class MovieServiceImpl implements IMovieService{
                return ResponseEntity.ok(movieResponseDto);
     }
 
+    @Override
+    public ResponseEntity<List<MovieResponseDto>> getAllMovies() {
+             List<Movie> movieList =  movieRepository.findAll();
+
+              if (movieList.isEmpty()) {
+                  return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+              }
+
+               List<MovieResponseDto> movieResponseDtos = movieList.stream()
+                       .map(this::getMovieResponseDto).toList();
+
+        return ResponseEntity.ok(movieResponseDtos);
+    }
+
     private @NonNull MovieResponseDto getMovieResponseDto(Movie savedMovie) {
         MovieResponseDto movieResponseDto = new MovieResponseDto();
 
