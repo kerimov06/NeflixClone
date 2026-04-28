@@ -2,6 +2,7 @@ package com.turankerimov.controller.movie;
 
 import com.turankerimov.dto.movie.MovieDtoIU;
 import com.turankerimov.dto.movie.MovieResponseDto;
+import com.turankerimov.entity.Genre;
 import com.turankerimov.service.movie.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,5 +41,12 @@ public class MovieControllerImpl implements IMovieController {
     @Override
     public ResponseEntity<List<MovieResponseDto>> getAllMovies() {
         return movieService.getAllMovies();
+    }
+
+
+    @GetMapping("/getByCatgory")
+    @Override
+    public ResponseEntity<List<MovieResponseDto>> getAllMoviesByCategory(@RequestParam(name = "genre") Genre genre) {
+        return movieService.getAllMoviesByCategory(genre);
     }
 }

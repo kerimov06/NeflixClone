@@ -15,6 +15,7 @@ public class NetflixCloneApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(NetflixCloneApplication.class, args);
+
 	}
 
 }

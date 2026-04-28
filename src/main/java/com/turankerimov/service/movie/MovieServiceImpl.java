@@ -2,6 +2,7 @@ package com.turankerimov.service.movie;
 
 import com.turankerimov.dto.movie.MovieDtoIU;
 import com.turankerimov.dto.movie.MovieResponseDto;
+import com.turankerimov.entity.Genre;
 import com.turankerimov.entity.Movie;
 import com.turankerimov.excption.BaseException;
 import com.turankerimov.excption.ErrorCode;
@@ -83,6 +84,25 @@ public class MovieServiceImpl implements IMovieService{
                        .map(this::getMovieResponseDto).toList();
 
         return ResponseEntity.ok(movieResponseDtos);
+    }
+
+
+    @Override
+    public ResponseEntity<List<MovieResponseDto>> getAllMoviesByCategory(Genre genre) {
+                List<Movie> movieList =  movieRepository.findByGenre(genre);
+
+                if (movieList.isEmpty()) {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+
+                List<MovieResponseDto> movieResponseDto = new ArrayList<>();
+
+                 for (Movie movie : movieList) {
+                     movieResponseDto.add(getMovieResponseDto(movie));
+                 }
+
+
+        return ResponseEntity.ok(movieResponseDto);
     }
 
     private @NonNull MovieResponseDto getMovieResponseDto(Movie savedMovie) {

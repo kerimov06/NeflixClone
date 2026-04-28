@@ -71,7 +71,10 @@ public class AuthRequestService implements IAuthRequestService{
                     .orElseThrow(()-> new RuntimeException("Username not found"));
 
              String accessToken = jwtService.generateToken(user);
-             RefreshToken refreshToken = createRefreshToken(user)       ;
+             RefreshToken refreshToken = createRefreshToken(user);
+
+
+
 
         return ResponseEntity.ok(new AuthResponse(accessToken,refreshToken.getToken()));
     }
@@ -93,6 +96,7 @@ public class AuthRequestService implements IAuthRequestService{
 
                         String newAccessToken =  jwtService.generateToken(user);
                         RefreshToken newRefreshToken = createRefreshToken(user);
+
 
                    return ResponseEntity.ok(new AuthResponse(newAccessToken,newRefreshToken.getToken()));
     }
